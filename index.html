@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#11131b">
+<title>DreamBuild — Design Your Dream Space</title>
+<style>
+:root{--bg:#0d1018;--panel:#151a26;--panel2:#1b2231;--line:#2b3447;--text:#eef2fa;--muted:#9ba8bd;--accent:#f4a340;--accent2:#ffd18c;--danger:#f16c75;--shadow:0 18px 45px #0005}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:9px 12px;transition:.18s}button:hover{border-color:var(--accent);transform:translateY(-1px)}button.primary{background:var(--accent);border-color:var(--accent);color:#21170c;font-weight:750}button.ghost{background:transparent}button.danger{color:#ff9ca3}.app{min-height:100vh;display:flex;flex-direction:column}
+header{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--line);background:#10141eee;position:sticky;top:0;z-index:10;backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:11px;font-size:19px;font-weight:850;letter-spacing:-.5px}.brandmark{width:34px;height:34px;border-radius:11px;background:linear-gradient(145deg,#ffcb77,#ed8b2f);display:grid;place-items:center;color:#2b1a08;font-size:19px;box-shadow:0 5px 18px #f4a34040}.brand small{display:block;color:var(--muted);font-size:10px;font-weight:500;letter-spacing:.7px;margin-top:-2px}.header-actions{display:flex;gap:9px;align-items:center}.status{color:var(--muted);font-size:12px;margin-right:8px}
+.shell{display:grid;grid-template-columns:218px minmax(0,1fr);min-height:calc(100vh - 68px);flex:1}
+aside{border-right:1px solid var(--line);padding:20px 14px;background:#111620}.nav-label{font-size:10px;letter-spacing:1.3px;color:#718097;font-weight:800;padding:8px 11px}.navbtn{width:100%;display:flex;gap:12px;align-items:center;text-align:left;background:transparent;border:0;color:var(--muted);padding:11px;border-radius:10px;margin:2px 0}.navbtn.active,.navbtn:hover{background:#252b39;color:var(--text);transform:none}.navbtn.active{box-shadow:inset 3px 0 var(--accent)}.navico{width:20px;text-align:center;font-size:16px}.side-card{margin:26px 5px 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,#222b3b,#171d29)}.side-card b{display:block;margin-bottom:4px}.side-card p{color:var(--muted);font-size:11px;margin:0 0 10px}
+main{min-width:0;padding:24px 26px 32px}.pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px}.eyebrow{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}.pagehead h1{font-size:26px;letter-spacing:-.8px;margin:4px 0}.pagehead p{color:var(--muted);margin:0}.workarea{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:16px;align-items:start}
+.viewport{background:#171d29;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);min-height:590px;position:relative}.viewport-top{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border-bottom:1px solid var(--line);background:#1b2230}.viewtitle{font-weight:750}.viewtools{display:flex;gap:6px}.viewtools button{padding:7px 9px;font-size:12px}.scene-wrap{height:500px;position:relative;background:radial-gradient(ellipse at 50% 40%,#303c51,#1b2434 72%);overflow:hidden}#scene{width:100%;height:100%;display:block;touch-action:none}.hint{position:absolute;left:14px;bottom:12px;padding:7px 10px;border-radius:9px;background:#0b1019bb;color:#c5cfdf;font-size:11px;pointer-events:none}.scene-badge{position:absolute;top:13px;left:14px;background:#0c111dcc;border:1px solid #ffffff20;border-radius:9px;padding:7px 10px;font-size:11px;color:#d8e0ee;pointer-events:none}
+.panel{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:15px;margin-bottom:13px}.panel h3{margin:0 0 12px;font-size:14px}.panelhead{display:flex;justify-content:space-between;align-items:center}.muted{color:var(--muted)}.small{font-size:11px}.field{display:flex;flex-direction:column;gap:5px;margin:9px 0}.field label{color:var(--muted);font-size:11px}.field input,.field select{width:100%;background:#0f1420;border:1px solid var(--line);border-radius:9px;color:var(--text);padding:9px}.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.furniture-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.furn{padding:10px 7px;text-align:center;background:#1d2534;border:1px solid var(--line);border-radius:11px;font-size:11px}.furn span{display:block;font-size:21px;margin-bottom:3px}.furn:hover{border-color:var(--accent)}.actions{display:flex;gap:7px;flex-wrap:wrap}.actions button{flex:1}.color-row{display:flex;gap:8px;align-items:center}.color-row input{width:42px;height:34px;padding:2px;border:0;background:transparent}.selected-empty{padding:15px;border:1px dashed var(--line);border-radius:11px;color:var(--muted);font-size:12px;text-align:center}
+.view{display:none}.view.active{display:block}.home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.stat{padding:17px;border:1px solid var(--line);border-radius:15px;background:var(--panel)}.stat strong{font-size:23px;display:block}.stat span{color:var(--muted);font-size:11px}.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}.design-card{border:1px solid var(--line);border-radius:15px;background:var(--panel);overflow:hidden}.design-art{height:130px;display:grid;place-items:center;font-size:48px;background:linear-gradient(135deg,#3c4c62,#202b3b)}.design-card:nth-child(3n+2) .design-art{background:linear-gradient(135deg,#654d42,#282a39)}.design-card:nth-child(3n) .design-art{background:linear-gradient(135deg,#394f4c,#222b3a)}.design-info{padding:13px}.design-info b{display:block}.design-info p{color:var(--muted);font-size:11px;margin:4px 0 10px}.project-row{display:flex;justify-content:space-between;align-items:center;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:8px 0}.project-row p{margin:3px 0 0;color:var(--muted);font-size:11px}.empty{text-align:center;color:var(--muted);padding:45px 15px;border:1px dashed var(--line);border-radius:14px}
+footer{color:#728098;text-align:center;font-size:11px;padding:20px}
+.modal-back{position:fixed;inset:0;background:#05070bcc;display:none;place-items:center;z-index:30;padding:18px}.modal-back.show{display:grid}.modal{width:min(460px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}.modal h2{margin:0 0 8px}.modal p{color:var(--muted);font-size:12px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+body.light{--bg:#f3f5f8;--panel:#fff;--panel2:#f4f6fa;--line:#dce2eb;--text:#202a39;--muted:#69778b;background:var(--bg)}body.light header{background:#ffffffed}body.light aside{background:#f8f9fc}body.light .viewport{background:#e9eef5}body.light .viewport-top{background:#f4f6fa}body.light .field input,body.light .field select{background:#fff;color:#202a39}body.light .furn{background:#f6f7fa}body.light .side-card{background:#fff}body.light .navbtn.active{background:#e8edf5}body.light .scene-wrap{background:#dce5ef}
+@media(max-width:1050px){.workarea{grid-template-columns:minmax(0,1fr) 260px}.shell{grid-template-columns:190px minmax(0,1fr)}}
+@media(max-width:800px){.shell{grid-template-columns:1fr}aside{display:flex;overflow:auto;padding:8px;border-right:0;border-bottom:1px solid var(--line);position:sticky;top:68px;z-index:8}.nav-label,.side-card{display:none}.navbtn{width:auto;white-space:nowrap;margin:0 3px;padding:9px 12px}.workarea{grid-template-columns:1fr}.scene-wrap{height:420px}.viewport{min-height:0}main{padding:18px 14px}.home-grid{grid-template-columns:1fr 1fr}header{padding:0 14px}.status{display:none}}
+@media(max-width:480px){.brand{font-size:16px}.header-actions button{padding:8px}.pagehead{flex-direction:column}.scene-wrap{height:350px}.home-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><div class="brandmark">⌂</div><div>DreamBuild<small>DESIGN YOUR DREAM SPACE</small></div></div>
+  <div class="header-actions"><span class="status" id="saveStatus">All changes saved locally</span><button class="ghost" id="themeBtn" title="Toggle theme">☼</button><button class="primary" id="saveBtn">Save project</button></div>
+</header>
+<div class="shell">
+<aside>
+  <div class="nav-label">WORKSPACE</div>
+  <button class="navbtn active" data-view="home"><span class="navico">⌂</span>Home</button>
+  <button class="navbtn" data-view="editor"><span class="navico">▧</span>3D Editor</button>
+  <button class="navbtn" data-view="explore"><span class="navico">✧</span>Explore</button>
+  <button class="navbtn" data-view="projects"><span class="navico">▤</span>My Projects</button>
+  <div class="nav-label" style="margin-top:18px">MORE</div>
+  <button class="navbtn" data-view="library"><span class="navico">▦</span>Furniture Library</button>
+  <button class="navbtn" data-view="templates"><span class="navico">▣</span>Templates</button>
+  <button class="navbtn" data-view="settings"><span class="navico">⚙</span>Settings</button>
+  <div class="side-card"><b>Make it yours</b><p>Build a room, arrange furniture and save your ideas on this device.</p><button class="primary" style="width:100%" id="startBtn">Start designing</button></div>
+</aside>
+<main>
+<section class="view active" id="view-home">
+  <div class="pagehead"><div><div class="eyebrow">YOUR CREATIVE SPACE</div><h1>Design a space you love.</h1><p>Plan rooms, explore styles and bring your ideas to life in 3D.</p></div><button class="primary" id="homeCreate">＋ New design</button></div>
+  <div class="home-grid"><div class="stat"><strong>3D</strong><span>Interactive room preview</span></div><div class="stat"><strong>Local</strong><span>Projects saved on this device</span></div><div class="stat"><strong>6</strong><span>Room types to start with</span></div></div>
+  <div class="pagehead"><div><h2 style="font-size:18px;margin:0">Start with a room</h2><p>Choose a room type and customize it.</p></div></div>
+  <div class="cards" id="roomCards"></div>
+</section>
+<section class="view" id="view-editor">
+  <div class="pagehead"><div><div class="eyebrow">DESIGN STUDIO</div><h1 id="projectTitle">Untitled room</h1><p>Drag the room to orbit. Select furniture to move or rotate it.</p></div><div class="actions"><button id="topViewBtn">Top view</button><button id="resetViewBtn">Reset view</button></div></div>
+  <div class="workarea">
+    <div class="viewport">
+      <div class="viewport-top"><span class="viewtitle">◈ 3D Room Preview</span><div class="viewtools"><button id="zoomIn">＋</button><button id="zoomOut">－</button><button id="exportBtn">Export image</button></div></div>
+      <div class="scene-wrap"><canvas id="scene"></canvas><div class="scene-badge" id="sceneBadge">BEDROOM · 4m × 5m</div><div class="hint">Drag to orbit · Scroll to zoom · Click an object to select</div></div>
+    </div>
+    <div>
+      <div class="panel"><div class="panelhead"><h3>Room dimensions</h3><span class="small muted">metres</span></div><div class="two"><div class="field"><label>Length</label><input id="roomLength" type="number" min="2" max="15" step=".5" value="5"></div><div class="field"><label>Width</label><input id="roomWidth" type="number" min="2" max="15" step=".5" value="4"></div></div><div class="field"><label>Wall height</label><input id="roomHeight" type="number" min="2" max="6" step=".5" value="3"></div><button class="primary" style="width:100%" id="applyRoom">Apply dimensions</button></div>
+      <div class="panel"><h3>＋ Add furniture</h3><div class="furniture-grid" id="furnitureButtons"></div></div>
+      <div class="panel"><h3>Room finishes</h3><div class="field"><label>Wall colour</label><div class="color-row"><input type="color" id="wallColor" value="#e7dfd2"><span class="small muted">Change wall appearance</span></div></div><div class="field"><label>Floor colour</label><div class="color-row"><input type="color" id="floorColor" value="#9b704d"><span class="small muted">Change floor appearance</span></div></div><div class="field"><label>Lighting</label><select id="lighting"><option value="day">Daylight</option><option value="warm">Warm evening</option><option value="night">Night</option></select></div></div>
+      <div class="panel"><div class="panelhead"><h3>Selected object</h3><button class="ghost danger small" id="deleteObject">Delete</button></div><div id="selectionControls"><div class="selected-empty">Select an item in the room to edit it.</div></div></div>
+    </div>
+  </div>
+</section>
+<section class="view" id="view-explore"><div class="pagehead"><div><div class="eyebrow">IDEA GALLERY</div><h1>Explore designs</h1><p>Browse starter ideas and open one in the editor.</p></div></div><div class="cards" id="exploreCards"></div></section>
+<section class="view" id="view-projects"><div class="pagehead"><div><div class="eyebrow">YOUR WORK</div><h1>My projects</h1><p>Your designs are stored locally in this browser.</p></div><button class="primary" id="projectNew">＋ New project</button></div><div id="projectList"></div></section>
+<section class="view" id="view-library"><div class="pagehead"><div><div class="eyebrow">OBJECT COLLECTION</div><h1>Furniture library</h1><p>Choose an object to add it to your current room.</p></div></div><div class="cards" id="libraryCards"></div></section>
+<section class="view" id="view-templates"><div class="pagehead"><div><div class="eyebrow">QUICK START</div><h1>Room templates</h1><p>Start with a layout, then make it your own.</p></div></div><div class="cards" id="templateCards"></div></section>
+<section class="view" id="view-settings"><div class="pagehead"><div><div class="eyebrow">PREFERENCES</div><h1>Settings</h1><p>Control the look and manage local data.</p></div></div><div class="panel" style="max-width:600px"><h3>Appearance</h3><div class="field"><label>Theme</label><select id="themeSelect"><option value="dark">Dark</option><option value="light">Light</option></select></div><h3 style="margin-top:20px">Local data</h3><p class="muted small">DreamBuild stores project data in this browser using local storage. Clearing browser data may remove your projects. Export important designs as images.</p><button class="danger" id="clearData">Delete all local projects</button></div></section>
+<footer>DreamBuild · Design Your Dream Space · Your projects stay on this device</footer>
+</main>
+</div>
+</div>
+<div class="modal-back" id="nameModal"><div class="modal"><h2>Name your project</h2><p>Give your design a name so you can find it later.</p><div class="field"><label>Project name</label><input id="projectNameInput" value="My dream room"></div><div class="modal-actions"><button id="cancelName">Cancel</button><button class="primary" id="confirmName">Create project</button></div></div></div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const roomTypes=['Bedroom','Gaming Room','Office','Living Room','Kitchen','Bathroom'];
+const roomIcons=['🛏️','🎮','💻','🛋️','🍳','🛁'];
+const objects={
+ bed:{name:'Bed',icon:'🛏️',color:'#b7a18a',size:[2.0,.55,1.6],type:'bed'},
+ sofa:{name:'Sofa',icon:'🛋️',color:'#657c91',size:[1.9,.75,.85],type:'sofa'},
+ desk:{name:'Desk',icon:'🪑',color:'#986b45',size:[1.5,.75,.7],type:'desk'},
+ chair:{name:'Chair',icon:'🪑',color:'#d59b4c',size:[.55,.9,.55],type:'chair'},
+ wardrobe:{name:'Wardrobe',icon:'🚪',color:'#927354',size:[1.1,2,.55],type:'wardrobe'},
+ plant:{name:'Plant',icon:'🪴',color:'#4d936b',size:[.55,1.2,.55],type:'plant'},
+ lamp:{name:'Floor lamp',icon:'💡',color:'#d7b86d',size:[.35,1.5,.35],type:'lamp'},
+ tv:{name:'TV stand',icon:'📺',color:'#343b48',size:[1.4,.65,.4],type:'tv'},
+ table:{name:'Coffee table',icon:'▱',color:'#9a6d48',size:[1,.45,.7],type:'table'},
+ bookshelf:{name:'Bookshelf',icon:'📚',color:'#8a6248',size:[.9,1.7,.35],type:'bookshelf'},
+ fridge:{name:'Fridge',icon:'🧊',color:'#aab6c2',size:[.75,1.8,.7],type:'fridge'},
+ cabinet:{name:'Cabinet',icon:'🗄️',color:'#9c7959',size:[1.2,.9,.45],type:'cabinet'}
+};
+let state={name:'My dream room',room:'Bedroom',length:5,width:4,height:3,wall:'#e7dfd2',floor:'#9b704d',lighting:'day',items:[]};
+let selected=null, projects=JSON.parse(localStorage.getItem('dreambuild-projects')||'[]');
+let scene,camera,renderer,controls,roomGroup,raycaster,mouse,objectMeshes=[],floorMesh,wallMeshes=[];
+function init3D(){
+ const canvas=$('#scene');scene=new THREE.Scene();scene.background=new THREE.Color('#202b3c');
+ camera=new THREE.PerspectiveCamera(42,1,.1,100);camera.position.set(7,6,8);
+ renderer=new THREE.WebGLRenderer({canvas,antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+ controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.target.set(0,1,0);controls.maxPolarAngle=Math.PI*.49;controls.minDistance=3;controls.maxDistance=18;
+ scene.add(new THREE.HemisphereLight(0xffffff,0x667080,2));
+ const sun=new THREE.DirectionalLight(0xffffff,2.1);sun.position.set(-4,9,6);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);scene.add(sun);
+ roomGroup=new THREE.Group();scene.add(roomGroup);raycaster=new THREE.Raycaster();mouse=new THREE.Vector2();
+ canvas.addEventListener('pointerdown',pickObject);
+ window.addEventListener('resize',resize3D);resize3D();buildRoom();
+ function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera)}animate();
+}
+function resize3D(){if(!renderer)return;const c=$('#scene'),w=c.clientWidth,h=c.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+function mat(color,rough=.8){return new THREE.MeshStandardMaterial({color,roughness:rough})}
+function addBox(parent,w,h,d,color,x,y,z,opts={}){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(color));mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;parent.add(mesh);return mesh}
+function buildRoom(){
+ while(roomGroup.children.length) {const child=roomGroup.children.pop();child.geometry?.dispose();}
+ objectMeshes=[];wallMeshes=[];
+ const L=state.length,W=state.width,H=state.height;
+ floorMesh=addBox(roomGroup,L,.12,W,state.floor,0,-.06,0);
+ const wallMat=mat(state.wall);
+ const back=new THREE.Mesh(new THREE.BoxGeometry(L,H,.12),wallMat);back.position.set(0,H/2,-W/2);back.receiveShadow=true;roomGroup.add(back);wallMeshes.push(back);
+ const left=new THREE.Mesh(new THREE.BoxGeometry(.12,H,W),wallMat);left.position.set(-L/2,H/2,0);left.receiveShadow=true;roomGroup.add(left);wallMeshes.push(left);
+ // subtle baseboard
+ addBox(roomGroup,L,.08,.15,'#b9aa98',0,.04,-W/2+.06);
+ state.items.forEach(item=>makeFurniture(item));
+ applyLighting();
+ $('#sceneBadge').textContent=`${state.room.toUpperCase()} · ${L}m × ${W}m`;
+}
+function makeFurniture(item){
+ const def=objects[item.kind]||objects.chair, group=new THREE.Group();group.position.set(item.x||0,0,item.z||0);group.rotation.y=item.rot||0;group.userData.itemId=item.id;
+ const [w,h,d]=def.size,c=item.color||def.color;
+ if(def.type==='bed'){
+  addBox(group,w,.22,d,c,0,.18,0);addBox(group,w,.24,.18,'#e9e2d6',0,.39,d*.32);addBox(group,w*.48,.12,d*.25,'#f4eee5',-.45,.42,-.42);
+ }else if(def.type==='sofa'){
+  addBox(group,w*.9,.3,d*.72,c,0,.38,0);addBox(group,w*.9,.65,.16,c,0,.72,-d*.37);addBox(group,.16,.58,d*.75,c,-w*.43,.65,0);addBox(group,.16,.58,d*.75,c,w*.43,.65,0);
+ }else if(def.type==='desk'){
+  addBox(group,w,.12,d,c,0,.72,0);for(const x of [-w*.42,w*.42])for(const z of [-d*.38,d*.38])addBox(group,.08,.7,.08,'#5c4636',x,.35,z);
+ }else if(def.type==='chair'){
+  addBox(group,w,.12,d,c,0,.48,0);addBox(group,w,.48,.1,c,0,.77,-d*.42);addBox(group,.09,.45,.09,'#5c4636',-.19,.22,-.18);addBox(group,.09,.45,.09,'#5c4636',.19,.22,-.18);
+ }else if(def.type==='plant'){
+  addBox(group,.38,.25,.38,'#9b704d',0,.13,0);const stem=new THREE.Mesh(new THREE.ConeGeometry(.3,.8,8),mat('#4b9a68'));stem.position.y=.68;group.add(stem);const leaf=new THREE.Mesh(new THREE.SphereGeometry(.28,10,8),mat('#69ae79'));leaf.position.set(.12,1.0,.05);group.add(leaf);
+ }else if(def.type==='lamp'){
+  addBox(group,.24,.08,.24,'#a78a61',0,.04,0);addBox(group,.06,1.12,.06,'#d4c2a0',0,.62,0);const shade=new THREE.Mesh(new THREE.ConeGeometry(.25,.35,16,1,true),new THREE.MeshStandardMaterial({color:'#f4d99b',side:THREE.DoubleSide}));shade.position.y=1.34;group.add(shade);
+ }else{
+  addBox(group,w,h,d,c,0,h/2,0);
+  if(def.type==='tv'){addBox(group,w*.8,.55,.05,'#11151d',0,h+.3,-d*.1)}
+  if(def.type==='bookshelf'){for(let y=.35;y<h;y+=.42)addBox(group,w*.9,.035,d*.92,'#d1b08a',0,y,0)}
+ }
+ group.traverse(o=>{if(o.isMesh){o.userData.parentItem=group;}});roomGroup.add(group);objectMeshes.push(group);
+}
+function applyLighting(){const lights=scene.children.filter(o=>o.isDirectionalLight);if(lights[0]){lights[0].intensity=state.lighting==='night'?.45:state.lighting==='warm'?1.2:2.1;lights[0].color.set(state.lighting==='warm'?'#ffc987':'#ffffff')}scene.background=new THREE.Color(state.lighting==='night'?'#101827':state.lighting==='warm'?'#544338':'#202b3c')}
+function pickObject(e){const rect=renderer.domElement.getBoundingClientRect();mouse.x=((e.clientX-rect.left)/rect.width)*2-1;mouse.y=-((e.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(mouse,camera);const hits=raycaster.intersectObjects(objectMeshes,true);if(hits.length){let g=hits[0].object;while(g.parent&&g.parent!==roomGroup)g=g.parent;selectItem(g.userData.itemId)}else selectItem(null)}
+function selectItem(id){selected=id;const item=state.items.find(x=>x.id===id);const box=$('#selectionControls');if(!item){box.innerHTML='<div class="selected-empty">Select an item in the room to edit it.</div>';return}box.innerHTML=`<div class="small muted" style="margin-bottom:8px">${objects[item.kind].name}</div><div class="two"><div class="field"><label>Position X</label><input id="posX" type="number" step=".1" value="${item.x}"></div><div class="field"><label>Position Z</label><input id="posZ" type="number" step=".1" value="${item.z}"></div></div><div class="field"><label>Rotation</label><input id="rotation" type="range" min="0" max="360" value="${Math.round(item.rot*180/Math.PI)}"></div><div class="field"><label>Object colour</label><input id="itemColor" type="color" value="${item.color||objects[item.kind].color}"></div><button id="applyObject" class="primary" style="width:100%">Apply changes</button>`;
+ $('#applyObject').onclick=()=>{item.x=clamp(parseFloat($('#posX').value)||0,-state.length/2+.4,state.length/2-.4);item.z=clamp(parseFloat($('#posZ').value)||0,-state.width/2+.4,state.width/2-.4);item.rot=(parseFloat($('#rotation').value)||0)*Math.PI/180;item.color=$('#itemColor').value;buildRoom();selectItem(id);setStatus('Changes saved locally')};
+}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function addItem(kind){const item={id:crypto.randomUUID(),kind,x:(Math.random()-.5)*.8,z:(Math.random()-.5)*.8,rot:0,color:objects[kind].color};state.items.push(item);buildRoom();selectItem(item.id);setStatus(`${objects[kind].name} added`)}
+function setStatus(t){$('#saveStatus').textContent=t}
+function saveProject(){const idx=projects.findIndex(p=>p.id===activeProjectId);const data={id:activeProjectId||crypto.randomUUID(),name:state.name,updated:new Date().toISOString(),state:structuredClone(state)};if(idx>=0)projects[idx]=data;else projects.unshift(data);activeProjectId=data.id;localStorage.setItem('dreambuild-projects',JSON.stringify(projects));setStatus('Saved on this device');renderProjects()}
+let activeProjectId=null;
+function loadProject(p){state=structuredClone(p.state);activeProjectId=p.id;syncEditor();buildRoom();showView('editor')}
+function syncEditor(){$('#projectTitle').textContent=state.name;$('#roomLength').value=state.length;$('#roomWidth').value=state.width;$('#roomHeight').value=state.height;$('#wallColor').value=state.wall;$('#floorColor').value=state.floor;$('#lighting').value=state.lighting}
+function createNew(room='Bedroom'){state={name:`${room} design`,room,length:5,width:4,height:3,wall:'#e7dfd2',floor:'#9b704d',lighting:'day',items:[]};activeProjectId=null;syncEditor();buildRoom();showView('editor')}
+function showView(name){$$('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${name}`));$$('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.view===name));if(name==='projects')renderProjects();if(name==='editor')resize3D();window.scrollTo({top:0,behavior:'smooth'})}
+function card(room,i){return `<div class="design-card"><div class="design-art">${roomIcons[i%roomIcons.length]}</div><div class="design-info"><b>${room}</b><p>Start a fresh ${room.toLowerCase()} layout.</p><button class="primary" data-room="${room}">Design room →</button></div></div>`}
+function renderRoomCards(){const html=roomTypes.map(card).join('');$('#roomCards').innerHTML=html;$('#exploreCards').innerHTML=html;$('#templateCards').innerHTML=html;$$('[data-room]').forEach(b=>b.onclick=()=>createNew(b.dataset.room))}
+function renderFurniture(){const html=Object.entries(objects).map(([k,o])=>`<button class="furn" data-kind="${k}"><span>${o.icon}</span>${o.name}</button>`).join('');$('#furnitureButtons').innerHTML=html;$('#libraryCards').innerHTML=Object.entries(objects).map(([k,o])=>`<div class="design-card"><div class="design-art">${o.icon}</div><div class="design-info"><b>${o.name}</b><p>3D object · Add to your room</p><button class="primary" data-kind="${k}">＋ Add object</button></div></div>`).join('');$$('[data-kind]').forEach(b=>b.onclick=()=>{addItem(b.dataset.kind);showView('editor')})}
+function renderProjects(){const el=$('#projectList');if(!projects.length){el.innerHTML='<div class="empty"><div style="font-size:34px">▤</div><b>No saved projects yet</b><p>Create a room and press Save project.</p></div>';return}el.innerHTML=projects.map(p=>`<div class="project-row"><div><b>${escapeHtml(p.name)}</b><p>${new Date(p.updated).toLocaleString()} · ${p.state.items.length} objects</p></div><div class="actions"><button data-open="${p.id}">Open</button><button data-dup="${p.id}">Duplicate</button><button class="danger" data-del="${p.id}">Delete</button></div></div>`).join('');$$('[data-open]').forEach(b=>b.onclick=()=>loadProject(projects.find(p=>p.id===b.dataset.open)));$$('[data-dup]').forEach(b=>b.onclick=()=>{const p=projects.find(p=>p.id===b.dataset.dup);const c=structuredClone(p);c.id=crypto.randomUUID();c.name+=' copy';projects.unshift(c);localStorage.setItem('dreambuild-projects',JSON.stringify(projects));renderProjects()});$$('[data-del]').forEach(b=>b.onclick=()=>{projects=projects.filter(p=>p.id!==b.dataset.del);localStorage.setItem('dreambuild-projects',JSON.stringify(projects));renderProjects()})}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function openNameModal(){ $('#nameModal').classList.add('show');$('#projectNameInput').focus()}
+function exportImage(){renderer.render(scene,camera);const a=document.createElement('a');a.download=(state.name.replace(/[^a-z0-9]+/gi,'-')||'dreambuild-room')+'.png';a.href=renderer.domElement.toDataURL('image/png');a.click()}
+init3D();renderRoomCards();renderFurniture();syncEditor();
+$$('.navbtn').forEach(b=>b.onclick=()=>showView(b.dataset.view));
+$('#startBtn').onclick=$('#homeCreate').onclick=$('#projectNew').onclick=()=>openNameModal();
+$('#cancelName').onclick=()=>$('#nameModal').classList.remove('show');
+$('#confirmName').onclick=()=>{const n=$('#projectNameInput').value.trim()||'My dream room';createNew('Bedroom');state.name=n;syncEditor();$('#nameModal').classList.remove('show')};
+$('#saveBtn').onclick=saveProject;
+$('#applyRoom').onclick=()=>{state.length=clamp(parseFloat($('#roomLength').value)||5,2,15);state.width=clamp(parseFloat($('#roomWidth').value)||4,2,15);state.height=clamp(parseFloat($('#roomHeight').value)||3,2,6);buildRoom();setStatus('Room dimensions updated')};
+$('#wallColor').oninput=e=>{state.wall=e.target.value;buildRoom()};$('#floorColor').oninput=e=>{state.floor=e.target.value;buildRoom()};$('#lighting').onchange=e=>{state.lighting=e.target.value;applyLighting()};
+$('#deleteObject').onclick=()=>{if(!selected)return;state.items=state.items.filter(x=>x.id!==selected);selected=null;buildRoom();selectItem(null)};
+$('#exportBtn').onclick=exportImage;
+$('#zoomIn').onclick=()=>{camera.position.multiplyScalar(.88);controls.update()};$('#zoomOut').onclick=()=>{camera.position.multiplyScalar(1.12);controls.update()};
+$('#topViewBtn').onclick=()=>{camera.position.set(0,Math.max(state.length,state.width)*1.6,0.01);controls.target.set(0,0,0);controls.update()};
+$('#resetViewBtn').onclick=()=>{camera.position.set(7,6,8);controls.target.set(0,1,0);controls.update()};
+$('#themeBtn').onclick=()=>{document.body.classList.toggle('light');$('#themeSelect').value=document.body.classList.contains('light')?'light':'dark';localStorage.setItem('dreambuild-theme',$('#themeSelect').value)};
+$('#themeSelect').onchange=e=>{document.body.classList.toggle('light',e.target.value==='light');localStorage.setItem('dreambuild-theme',e.target.value)};
+const savedTheme=localStorage.getItem('dreambuild-theme');if(savedTheme==='light'){document.body.classList.add('light');$('#themeSelect').value='light'}
+$('#clearData').onclick=()=>{if(confirm('Delete all saved DreamBuild projects from this browser?')){projects=[];localStorage.removeItem('dreambuild-projects');renderProjects();setStatus('Local projects deleted')}};
+</script>
+</body></html>
